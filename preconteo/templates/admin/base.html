@@ -65,7 +65,7 @@
                         {% block usertools %}
                         <li class="dropdown">
                             {% block welcome-msg %}
-                                <a href="#" >{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong></a>[<a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a>]
+                                <a href="#" >{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong></a>
                             {% endblock %}
                             <!--
                             <ul class="dropdown-menu">
