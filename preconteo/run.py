@@ -88,3 +88,23 @@ def start():
 			pass
 
 	print "Datos Cargados"
+
+from random import randint 
+from counter.models import *
+
+def test():
+
+	for i in [1,4,5]:
+			import pdb
+			pdb.set_trace()
+			partidos = Partido.objects.all()
+			for partido in partidos:
+				candidato = Candidato()
+				candidato.nombre = partido.descripcion
+				candidato.partido = partido
+				candidato.localidad_id = 2
+				candidato.renglon = 0
+				candidato.tipo_voto_id = VOTO.NO_APLICA
+				candidato.corporacion_id = i
+				candidato.documento = randint(1000000, 9999999)
+				candidato.save()

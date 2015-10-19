@@ -192,8 +192,7 @@ class VotosAsamblea(Votacion):
 		candidatos = Candidato.objects.filter(corporacion__id = CORPORACION.ASA).exclude(tipo_voto = VOTO.NO_PREFERENTE).order_by('partido')
 
 		for mesa in mesas:
-			import pdb
-			pdb.set_trace()
+			
 			for candidato in candidatos:
 
 				row = VotosAsamblea()
@@ -262,7 +261,7 @@ class VotosJAL(Votacion):
 	def sincronize():
 		mesas = JAL.objects.all() 
 		for mesa in mesas:
-			candidatos = Candidato.objects.filter(corporacion__id = CORPORACION.JAL).exclude(tipo_voto = VOTO.NO_PREFERENTE).order_by('partido')
+			candidatos = Candidato.objects.filter(corporacion__id = CORPORACION.JAL, partido__id = 22).exclude(tipo_voto = VOTO.NO_PREFERENTE).order_by('partido')
 			for candidato in candidatos:
 				row = VotosJAL()
 				row.candidato = candidato

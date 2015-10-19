@@ -57,7 +57,7 @@ ROOT_URLCONF = 'preconteo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["%s/preconteo/templates" % BASE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
