@@ -24,12 +24,12 @@ class VotosAdmin(admin.TabularInline):
 
 class CorporacionAdmin(admin.ModelAdmin):
 	
-    search_fields = ('puesto', 'mesa')
+    search_fields = ('puesto__descripcion', 'mesa')
     list_filter = ('puesto',)
     readonly_fields = ('puesto', 'mesa')
     fieldsets = [
         (None, {'fields': [ ('puesto','mesa'),'total_E11', 
-        'total_urna', 'incinerados','votos_blancos', 'votos_nulos', 'votos_no_marcaros'
+        'total_urna', 'incinerados','votos_blancos', 'votos_nulos', 'votos_no_marcaros','observaciones'
 
         ]}), ]  
 

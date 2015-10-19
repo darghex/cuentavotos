@@ -65,8 +65,9 @@
                         {% block usertools %}
                         <li class="dropdown">
                             {% block welcome-msg %}
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong> <span class="caret"></span></a>
+                                <a href="#" >{% trans 'Welcome,' %} <strong>{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}</strong></a>
                             {% endblock %}
+                            <!--
                             <ul class="dropdown-menu">
                                 {% if site_url %}
                                     <li><a href="{{ site_url }}">{% trans 'View site' %}</a></li>
@@ -81,14 +82,14 @@
                                 <li><a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a></li>
                                 {% endif %}
                                 <li><a href="{% url 'admin:logout' %}">{% trans 'Log out' %}</a></li>
-                            </ul>
+                            </ul>-->
                         </li>
                         {% endblock %}
                         {% block languages %}
                         <li class="divider-vertical"></li>
                         {% language_selector %}
                         {% endblock languages %}
-                        {% block logs %}
+                        {% block logs %}<!--
                         <li class="dropdown" id="recent-actions-module">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans 'Recent Actions' %} <b class="caret"></b></a>
                             {% load log %}
@@ -110,7 +111,7 @@
                                 <li class="disabled"><a href="#">{% trans 'None available' %}</a></li>
                                 {% endfor %}
                             </ul>
-                        </li>
+                        </li>-->
                         {% endblock %}
                         {% block userlinks %}
                         {% url 'django-admindocs-docroot' as docsroot %}
@@ -122,7 +123,7 @@
                         {% endif %}
                         {% block nav-global %}{% endblock %}
                     </ul>
-                </div><!--/.nav-collapse -->
+                </div>
             </div>
         </div>
     </div>

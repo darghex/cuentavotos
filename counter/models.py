@@ -33,7 +33,7 @@ class Candidato(models.Model):
 	corporacion = models.ForeignKey(Corporacion)
 	partido = models.ForeignKey(Partido)
 	localidad = models.ForeignKey(Localidad)
-	renglon =  models.CharField(max_length = 2)
+	renglon =  models.SmallIntegerField()
 	tipo_voto = models.ForeignKey(TipoVoto)
 	documento = models.CharField(max_length = 15, unique = True)
 
@@ -69,6 +69,7 @@ class E14(models.Model):
 	votos_blancos = models.SmallIntegerField(null =True)
 	votos_nulos = models.SmallIntegerField(null =True)
 	votos_no_marcaros = models.SmallIntegerField(verbose_name='No marcados', null =True)
+	observaciones = models.CharField(max_length = 300, null =True)
 
 	def __unicode__(self):
 		return "%s mesa %d" % (self.puesto.descripcion, self.mesa)
@@ -135,6 +136,9 @@ class VotosGobernacion(Votacion):
 				row.gobernacion = mesa
 				row.save()
 
+	class Meta:
+		ordering = ['candidato__partido', 'candidato__renglon',]
+
 	
 
 class Alcaldia(E14):
@@ -166,6 +170,9 @@ class VotosAlcaldia(Votacion):
 				row.candidato = candidato
 				row.alcaldia = mesa
 				row.save()
+
+	class Meta:
+		ordering = ['candidato__partido', 'candidato__renglon',]
 		
 
 class Asamblea(E14):
@@ -192,7 +199,7 @@ class VotosAsamblea(Votacion):
 		candidatos = Candidato.objects.filter(corporacion__id = CORPORACION.ASA).exclude(tipo_voto = VOTO.NO_PREFERENTE).order_by('partido')
 
 		for mesa in mesas:
-			
+
 			for candidato in candidatos:
 
 				row = VotosAsamblea()
@@ -202,6 +209,9 @@ class VotosAsamblea(Votacion):
 
 	def __unicode__(self):
 		return "%s %s (%s)" % (self.candidato.renglon, self.candidato.nombre, self.candidato.partido.abreviatura)
+
+	class Meta:
+		ordering = ['candidato__partido', 'candidato__renglon',]
 	
 
 class Concejo(E14):
@@ -237,6 +247,9 @@ class VotosConcejo(Votacion):
 	def __unicode__(self):
 		return "%s %s (%s)" % (self.candidato.renglon, self.candidato.nombre, self.candidato.partido.abreviatura)
 
+	class Meta:
+		ordering = ['candidato__partido', 'candidato__renglon',]
+
 
 class JAL(E14):
 
@@ -270,3 +283,6 @@ class VotosJAL(Votacion):
 
 	def __unicode__(self):
 		return "%s %s (%s)" % (self.candidato.renglon, self.candidato.nombre, self.candidato.partido.abreviatura)
+
+	class Meta:
+		ordering = ['candidato__partido', 'candidato__renglon',]
