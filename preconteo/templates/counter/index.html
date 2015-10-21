@@ -75,31 +75,45 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h2 class="page-header">Dashboard </h2>
+          <form class="form-horizontal">
+			  <div class="form-group">
+			    <label for="selectZona" class="col-sm-2 control-label">Zona</label>
+			    <div class="col-sm-10">
+			      <select class="form-control" id="selectZona" name="selectZona">
+				  <option value="-1">Todas</option>
+				  {% for zona in zonas %}
+				  <option value="{{ zona.id }}">{{zona}}</option>
+				  {% endfor %}
+				</select>
+			    </div>
+			  </div>
+			</form>
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
               
               <h4>Total Mesas</h4>
-              <span class="text-muted">0</span>
+              <span class="text-muted">{{ mesas.total }}</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
              
               <h4>Mesas Reportadas</h4>
-              <span class="text-muted">0</span>
+              <span class="text-muted">{{ mesas.reportadas }}</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               
               <h4>Mesas Sin Reportar</h4>
-              <span class="text-muted">0</span>
+              <span class="text-muted">{{ mesas.noreportadas }}</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
               
               <h4>Novedades</h4>
-              <span class="text-muted">0</span>
+              <span class="text-muted">{{ mesas.novedades }}</span>
             </div>
           </div>
 
           <h2 class="sub-header">Votacion {{ title }}</h2>
+			
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -115,7 +129,7 @@
                 <tr>
                   <td>{{ candidato.renglon }}</td>
                   <td>{{ candidato}}</td>
-                  <td>{{ candidato.partido }}</td>
+                  <td>{{ candidato.partido.abreviatura }}</td>
                   <td>0</td>
                  </tr>
                {% endfor %}

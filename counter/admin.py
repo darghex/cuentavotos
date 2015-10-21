@@ -6,6 +6,10 @@ from counter.models import *
 @admin.register(Puesto)
 class PuestoAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Candidato)
+class CandidatoAdmin(admin.ModelAdmin):
+    pass
 """
 
 class VotosAdmin(admin.TabularInline):

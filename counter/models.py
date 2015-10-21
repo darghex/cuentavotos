@@ -40,12 +40,20 @@ class Candidato(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+class Zona(models.Model):
+	numero = models.SmallIntegerField(help_text='numero de zona')	
+
+	def __unicode__(self):
+		return "Zona %d" % self.numero
+
 class Puesto(models.Model):
 	descripcion = models.CharField(max_length = 30)
 	mesas = models.SmallIntegerField()
+	zona = models.ForeignKey(Zona)
 
 	def __unicode__(self):
 		return self.descripcion
+
 
 
 class CORPORACION(object):
