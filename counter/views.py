@@ -37,7 +37,7 @@ def observaciones(request):
 	return render(request, 'counter/detalle.html', {'observaciones': data, 'zona': zona})
 
 def process(corporacion, zona = -1):
-	candidatos = Candidato.objects.filter(corporacion__id = corporacion).order_by('partido','renglon') 
+	candidatos = Candidato.objects.filter(corporacion__id = corporacion).exclude(tipo_voto = VOTO.NO_PREFERENTE).order_by('partido','renglon') 
 	zonas = Zona.objects.all()
 	
 	if zona == -1:

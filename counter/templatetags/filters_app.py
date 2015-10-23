@@ -17,16 +17,19 @@ def get_corporacion(corporacion):
 	elif corporacion == CORPORACION.GOB:
 		corp = Gobernacion
 	elif corporacion == CORPORACION.ASA:
-		corp == CORPORACION.ASA
+		corp = Asamblea
 	elif corporacion == CORPORACION.CON:
-		corp == CORPORACION.CON
+		corp = Concejo
 	elif corporacion == CORPORACION.JAL:
-		corp == CORPORACION.JAL
+		corp = JAL
 	return corp
 
 def votacion(tipo, corporacion, zona):
-	corp = get_corporacion(corporacion)	
+	
+
+	corp = get_corporacion(corporacion)		
 	cantidad = 0
+	
 	field = ''
 	if tipo == 'b':
 		field = 'votos_blancos'
@@ -36,10 +39,11 @@ def votacion(tipo, corporacion, zona):
 		field = 'votos_no_marcaros'
 	elif tipo == 'i':
 		field = 'incinerados'
-	#if zona == -1:
-	#	cantidad = corp.objects.all().aggregate(Sum(field))["%s__sum" % field]
-	#else:
-	#	cantidad = corp.objects.filter(puesto__zona__id = zona).aggregate(Sum(field))["%s__sum" % field]
+	
+	if zona == -1:
+		cantidad = corp.objects.all().aggregate(Sum(field))["%s__sum" % field]
+	else:
+		cantidad = corp.objects.filter(puesto__zona__id = zona).aggregate(Sum(field))["%s__sum" % field]
 	return cantidad
 
 

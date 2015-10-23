@@ -129,8 +129,10 @@
               </thead>
               <tbody>
               {% for candidato in candidatos %}
-                <tr>
-                  <td>{{ candidato.renglon }}</td>
+                <tr {% if candidato.renglon == 0 and candidato.tipo_voto != 1 %} style="background: #EAEAEA;"{% endif %}>
+                  <td>
+                    {{ candidato.renglon }}
+                  </td>
                   <td>{{ candidato}}</td>
                   <!--<td>{{ candidato.partido.abreviatura }}</td>-->
                   <td class="text-right">{{ candidato|votos:zona_id|default_if_none:0 }}</td>
