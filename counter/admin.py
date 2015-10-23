@@ -2,11 +2,13 @@ from django.contrib import admin
 
 # Register your models here.
 from counter.models import *
-"""
+from django import forms
+
 @admin.register(Puesto)
 class PuestoAdmin(admin.ModelAdmin):
     pass
 
+"""
 @admin.register(Candidato)
 class CandidatoAdmin(admin.ModelAdmin):
     pass
@@ -25,6 +27,13 @@ class VotosAdmin(admin.TabularInline):
 	def has_delete_permission(self, request, obj=None):
 		return False
 
+class E14Form( forms.ModelForm ):
+    observaciones = forms.CharField( widget=forms.Textarea )    
+    
+    class Meta:
+        model = E14
+        fields = '__all__'
+
 
 class CorporacionAdmin(admin.ModelAdmin):
 	
@@ -36,6 +45,7 @@ class CorporacionAdmin(admin.ModelAdmin):
         'total_urna', 'incinerados','votos_blancos', 'votos_nulos', 'votos_no_marcaros','observaciones'
 
         ]}), ]  
+    form = E14Form
 
 
 class VotosGobernacionAdmin(VotosAdmin):

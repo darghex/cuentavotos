@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 
 # Create your models here.
 
@@ -40,6 +41,29 @@ class Candidato(models.Model):
 	def __unicode__(self):
 		return self.nombre
 
+	def votos(self, zona=-1):
+		
+		votacion = None
+		if self.corporacion.id == int(CORPORACION.JAL):
+			votacion = self.votosjal_set
+		elif self.corporacion.id == int(CORPORACION.CON):
+			votacion = self.votosconcejo_set
+		elif self.corporacion.id == int(CORPORACION.ASA):
+			votacion = self.votosasamblea_set
+		elif self.corporacion.id == int(CORPORACION.ALC):
+			votacion = self.votosalcaldia_set
+		elif self.corporacion.id == int(CORPORACION.GOB):
+			votacion = self.votosgobernacion_set
+
+
+		if zona == -1:	
+			return votacion.all().aggregate(Sum('votos'))['votos__sum']
+		else:
+			return votacion.filter(alcaldia__puesto__zona__id = zona).aggregate(Sum('votos'))['votos__sum']
+
+
+
+
 class Zona(models.Model):
 	numero = models.SmallIntegerField(help_text='numero de zona')	
 
@@ -77,7 +101,7 @@ class E14(models.Model):
 	votos_blancos = models.SmallIntegerField(null =True)
 	votos_nulos = models.SmallIntegerField(null =True)
 	votos_no_marcaros = models.SmallIntegerField(verbose_name='No marcados', null =True)
-	observaciones = models.CharField(max_length = 300, null =True)
+	observaciones = models.CharField(max_length = 300, null =True, blank = True)
 
 	def __unicode__(self):
 		return "%s mesa %d" % (self.puesto.descripcion, self.mesa)
@@ -103,7 +127,7 @@ class E14(models.Model):
 			#corporacion.sincronize()
 
 class Votacion(models.Model):
- 	votos = models.SmallIntegerField(null = True)
+ 	votos = models.SmallIntegerField(null = True, blank = True )
 
 	def __unicode__(self):
 		return "%s (%s)" % (self.candidato.nombre, self.candidato.partido.abreviatura)

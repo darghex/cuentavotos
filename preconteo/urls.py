@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^asamblea$', 'counter.views.asamblea', name='asamblea'),
     url(r'^concejo$', 'counter.views.concejo', name='concejo'),
     url(r'^jal$', 'counter.views.jal', name='jal'),
+    url(r'^novedades$', 'counter.views.observaciones', name='novedades'),
     url(r'^admin/', include(admin.site.urls)),
 ]
