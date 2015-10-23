@@ -36,10 +36,10 @@ def votacion(tipo, corporacion, zona):
 		field = 'votos_no_marcaros'
 	elif tipo == 'i':
 		field = 'incinerados'
-	if zona == -1:
-		cantidad = corp.objects.all().aggregate(Sum(field))["%s__sum" % field]
-	else:
-		cantidad = corp.objects.filter(puesto__zona__id = zona).aggregate(Sum(field))["%s__sum" % field]
+	#if zona == -1:
+	#	cantidad = corp.objects.all().aggregate(Sum(field))["%s__sum" % field]
+	#else:
+	#	cantidad = corp.objects.filter(puesto__zona__id = zona).aggregate(Sum(field))["%s__sum" % field]
 	return cantidad
 
 
