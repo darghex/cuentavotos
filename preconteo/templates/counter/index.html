@@ -40,7 +40,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Resultados Votación. <i> Actualización {% now "P" %}</i></a>
+          <a class="navbar-brand" href="#">Resultados Votación.<i> {% now "P" %}</i></a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
@@ -74,7 +74,7 @@
           
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 class="page-header">Consolidado </h2>
+          <h2 class="page-header"> Zona: {{ d_zona }} Puesto: {{d_puesto}} </h2>
         <form class="form-horizontal" action="" method="post" name="form" id="form">
 			  {% csrf_token %}
         <div class="form-group">
@@ -88,6 +88,27 @@
 				</select>
 			    </div>
 			  </div>
+
+        <div class="form-group">
+          <label for="selectPuesto" class="col-sm-2 control-label">Puesto</label>
+          <div class="col-sm-10">
+            <select class="form-control" id="selectPuesto" name="selectPuesto">
+          <option value="-1">Todos</option>
+          {% for puesto in puestos %}
+          <option value="{{ puesto.id }}" {% ifequal puesto_id puesto.id %} selected="selected" {% endifequal%}>{{puesto}}</option>
+          {% endfor %}
+        </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-10">
+            <input class="form-control" type="submit" id="send" name="send" value="consultar">
+          
+          </div>
+        </div>
+
 			  </form>
 
           <div class="row placeholders">
@@ -107,7 +128,7 @@
               <span class="text-muted">{{ mesas.noreportadas }}</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder">
-              <a href="/novedades?zona={{zona_id}}">
+              <a href="/novedades?zona={{zona_id}}&puesto={{puesto_id}}">
               <h4>Novedades</h4>
               </a>
               <span class="text-muted">{{ mesas.novedades }}</span>
@@ -129,7 +150,7 @@
               </thead>
               <tbody>
               {% for candidato in candidatos %}
-                <tr {% if candidato.renglon == 0 and candidato.tipo_voto != 1 %} style="background: #EAEAEA;"{% endif %}>
+                <tr {% if candidato.renglon == 0 %} style="background: #EAEAEA;"{% endif %}>
                   <td>
                     {{ candidato.renglon }}
                   </td>
@@ -181,13 +202,34 @@
     <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
     <script type="text/javascript">
     //<![CDATA[
-            (function($) {
-                $(document).ready(function() {
-                    $('#selectZona').change(function(event) {
+          $(document).ready(function() {
+              $('#selectZona').change(function(event) {
                       $('#form').submit();
-                    });
-                });
-            }(jQuery));
+              });
+
+              /*$('#selectPuesto').change(function(event) {
+                      $('#form').submit();
+              });*/
+
+              $('#send').change(function(event) {
+                        $('#form').submit();
+              });
+
+              /*function reloadPage() {
+               // alert("Hola");
+                //location.reload(true);
+              }
+
+              function actualizar() {
+                    setInterval(reloadPage,'4000');
+                      
+              }
+              actualizar();*/
+
+
+          });          
+          
+         
     //]]>
     </script>
   
