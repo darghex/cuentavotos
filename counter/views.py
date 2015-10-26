@@ -32,17 +32,39 @@ def observaciones(request):
 	
 	if request.GET['zona'] != u'-1':
 		if request.GET['puesto'] == u'-1':
-			data = Alcaldia.objects.filter(puesto__zona__id = request.GET['zona'], observaciones__isnull = False)		
+			data = list()
+			data.append(Alcaldia.objects.filter(puesto__zona__id = request.GET['zona'], observaciones__isnull = False)		)
+			data.append(Gobernacion.objects.filter(puesto__zona__id = request.GET['zona'], observaciones__isnull = False)		)
+			data.append(JAL.objects.filter(puesto__zona__id = request.GET['zona'], observaciones__isnull = False)		)
+			data.append(Concejo.objects.filter(puesto__zona__id = request.GET['zona'], observaciones__isnull = False)		)
+			data.append(Asamblea.objects.filter(puesto__zona__id = request.GET['zona'], observaciones__isnull = False)		)
+
 		else:
-			data = Alcaldia.objects.filter(puesto__zona__id = request.GET['zona'], puesto__id = request.GET['puesto'], observaciones__isnull = False)		
+			data = list()
+			data.append(Alcaldia.objects.filter(puesto__zona__id = request.GET['zona'], puesto__id = request.GET['puesto'], observaciones__isnull = False)		)
+			data.append(Gobernacion.objects.filter(puesto__zona__id = request.GET['zona'], puesto__id = request.GET['puesto'], observaciones__isnull = False)		)
+			data.append(Concejo.objects.filter(puesto__zona__id = request.GET['zona'], puesto__id = request.GET['puesto'], observaciones__isnull = False)		)
+			data.append(JAL.objects.filter(puesto__zona__id = request.GET['zona'], puesto__id = request.GET['puesto'], observaciones__isnull = False)		)
+			data.append(Asamblea.objects.filter(puesto__zona__id = request.GET['zona'], puesto__id = request.GET['puesto'], observaciones__isnull = False)		)
+
 			puesto = Puesto.objects.get(pk = request.GET['puesto']).descripcion
 
 		zona = Zona.objects.get(pk = request.GET['zona']).numero
 	else:
 		if request.GET['puesto'] == u'-1':
-			data = Alcaldia.objects.filter(observaciones__isnull = False)		
+			data = list()
+			data.append(Alcaldia.objects.filter(observaciones__isnull = False)		)
+			data.append(Gobernacion.objects.filter(observaciones__isnull = False)		)
+			data.append(JAL.objects.filter(observaciones__isnull = False)		)
+			data.append(Asamblea.objects.filter(observaciones__isnull = False)		)
+			data.append(Concejo.objects.filter(observaciones__isnull = False)		)
 		else:
-			data = Alcaldia.objects.filter(observaciones__isnull = False, puesto__id = request.GET['puesto'])		
+			data = list()
+			data.append(Alcaldia.objects.filter(observaciones__isnull = False, puesto__id = request.GET['puesto'])		)
+			data.append(Gobernacion.objects.filter(observaciones__isnull = False, puesto__id = request.GET['puesto'])		)
+			data.append(JAL.objects.filter(observaciones__isnull = False, puesto__id = request.GET['puesto'])		)
+			data.append(Concejo.objects.filter(observaciones__isnull = False, puesto__id = request.GET['puesto'])		)
+			data.append(Asamblea.objects.filter(observaciones__isnull = False, puesto__id = request.GET['puesto'])		)
 			puesto = Puesto.objects.get(pk = request.GET['puesto']).descripcion
 
 

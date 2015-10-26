@@ -77,13 +77,15 @@
                  </tr>
               </thead>
               <tbody>
-              {% for observacion in observaciones %}
+              {% for rows in observaciones %}  
+              {% for observacion in rows %}
                 <tr>
                   <td>{{ observacion.puesto }}</td>
                   <td>{{ observacion.mesa }}</td>
                   <!--<td>{{ candidato.partido.abreviatura }}</td>-->
                   <td > {{ observacion.observaciones }}</td>
                  </tr>
+               {% endfor %}
                {% endfor %}
                  
 

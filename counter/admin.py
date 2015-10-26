@@ -3,12 +3,12 @@ from django.contrib import admin
 # Register your models here.
 from counter.models import *
 from django import forms
-
+"""
 @admin.register(Puesto)
 class PuestoAdmin(admin.ModelAdmin):
     pass
 
-"""
+
 @admin.register(Candidato)
 class CandidatoAdmin(admin.ModelAdmin):
     pass
